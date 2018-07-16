@@ -7,25 +7,27 @@ export function getResultType(type, options) {
     let result = realType;
 
     if (type.isNullableArray) {
-      result = useImmutable ? [realType, 'null'].join(' | ') : `(${[realType, 'null'].join(' | ')})`;
+      //result = useImmutable ? [realType, 'null'].join(' | ') : `(${[realType, 'null'].join(' | ')})`;
     }
 
     if (useImmutable) {
-      result = `ReadonlyArray<${result}>`;
-    } else {
       result = `${result}[]`;
+    } else {
+      result = `List<${result}>`;
     }
 
     if (!type.isRequired) {
-      result = [result, 'null'].join(' | ');
+      //result = [result, 'null'].join(' | ');
     }
 
     return result;
   } else {
-    if (type.isRequired) {
+    /*if (type.isRequired) {
       return realType;
     } else {
       return [realType, 'null'].join(' | ');
-    }
+    }*/
+
+    return realType;
   }
 }
